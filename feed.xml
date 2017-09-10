@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="https://www.w3.org/2005/Atom" xmlns:dc="https://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Grupo de estudos Keyworks</title>
+    <description></description>
+    <link></link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Introdução ao Node.js</title>
+        <description>Criação de um servidor REST básico utilizando Node.js.</description>
+        <pubDate>Sat, 09 Sep 2017 00:00:00 -0300</pubDate>
+        <link>/posts/introducao-nodejs</link>
+        <guid isPermaLink="true">/posts/introducao-nodejs</guid>
+      </item>
+    
+  </channel>
+</rss>

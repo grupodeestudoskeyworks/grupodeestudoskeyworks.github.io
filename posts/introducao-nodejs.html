@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Grupo de estudos Keyworks | Introdução ao Node.js</title>
+  <meta name="description" content="Criação de um servidor REST básico utilizando Node.js.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Introdução ao Node.js">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/posts/introducao-nodejs">
+  <meta property="og:description" content="Criação de um servidor REST básico utilizando Node.js.">
+  <meta property="og:site_name" content="Grupo de estudos Keyworks">
+  <meta property="og:image" content="/assets/og-image.jpg">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="/posts/introducao-nodejs">
+  <meta name="twitter:title" content="Introdução ao Node.js">
+  <meta name="twitter:description" content="Criação de um servidor REST básico utilizando Node.js.">
+  <meta name="twitter:image" content="/assets/og-image.jpg">
+
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link href="/feed.xml" type="application/rss+xml" rel="alternate" title="Grupo de estudos Keyworks Last 10 blog posts" />
+
+  
+
+  
+    <link rel="stylesheet" href="/assets/light.css">
+
+  
+</head>
+
+<body>
+  <main>
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        <nav class="header-nav appear">
+  <a href="/" class="header-logo" title="Grupo de estudos Keyworks">Grupo de estudos Keyworks</a>
+  <ul class="header-links">
+    
+    
+    
+    
+      <li>
+        <a href="https://github.com/grupodeestudoskeyworks" rel="noreferrer noopener" target="_blank" title="GitHub">
+          <span class="icon icon-github"></span>
+        </a>
+      </li>
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="/feed.xml" rel="noreferrer noopener" target="_blank" title="RSS">
+          <span class="icon icon-rss"></span>
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+        <article class="article appear">
+          <header class="article-header">
+            <h1>Introdução ao Node.js</h1>
+            <p>Criação de um servidor REST básico utilizando Node.js.</p>
+            <div class="article-list-footer">
+              <span class="article-list-date">
+                  
+                  
+                  Sábado
+                  ,
+                  9
+                  de
+                  setembro
+                    
+                  de
+                  2017
+              </span>
+              <span class="article-list-divider">-</span>
+              <span class="article-list-minutes">
+                
+                
+                  
+                  
+                    3 minutos de leitura
+                  
+                
+              </span>
+              <span class="article-list-divider">-</span>
+              <div class="article-list-tags">
+                
+                  <a href="/tag/nodejs">nodejs</a>
+                
+              </div>
+            </div>
+          </header>
+
+          <div class="article-content">
+            <h2 id="instalação">Instalação</h2>
+
+<p>Acesse a <a href="https://nodejs.org/en/download/">página de download</a> do site oficial, você pode baixar tanto a versão <a href="https://en.wikipedia.org/wiki/Long-term_support" title="Long-term support">LTS</a>, como a versão corrente.</p>
+
+<blockquote>
+  <p>A versão corrente contém funcionalidades que ainda estão sendo testadas e podem estar instáveis.</p>
+</blockquote>
+
+<h4 id="linux">Linux</h4>
+
+<p>Para prosseguir com a instalação no Linux, a melhor opção é baixar dos repositórios oficiais de sua distribuição, você pode encontrar as instruções <a href="https://nodejs.org/en/download/package-manager/">aqui</a>.</p>
+
+<h4 id="windows">Windows</h4>
+
+<p>Baixe o executável conforme sua arquitetura, após o download prossiga com o next, next, finish e estará instalado se tudo ocorrer como esperado.</p>
+
+<p>Após o download você tera o node e o <a href="https://www.npmjs.com/" title="Node Package Manager">npm</a><em>(posteriormente iremos ver o que ele é)</em> instalados. Verifique se ambos foram instalados corretamente através dos comandos:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>node --version
+v8.4.0
+<span class="gp">$ </span>npm --version
+5.4.0</code></pre></figure>
+
+<p>Se aparecer <strong>outro resultado</strong>, que não a informação da versão algo ocorreu errado durante a instalação, tente repetir o processo de instalação. Se mesmo assim não funcionar entre em contato para podermos ajuda-lo(a).</p>
+
+<h3 id="o-que-é-o-node">O que é o node?</h3>
+
+<p>Um tempo de execução <strong>JavaScript</strong> contruido em cima do <a href="https://developers.google.com/v8/">motor JavaScript V8 do Chrome</a>. Ele usa um modelo <a href="https://pt.wikipedia.org/wiki/Programa%C3%A7%C3%A3o_orientada_a_eventos"><strong>orientado a eventos</strong></a> sem bloqueio de I/O, o que o torna leve e eficiente. <a href="https://www.npmjs.com/">npm</a>, o ecosistema de pacotes do Node.js, é o maior ecosistema de bibliotecas de código aberto no mundo.</p>
+
+<h3 id="hello-world">Hello World</h3>
+
+<p>Crie a pasta <code class="highlighter-rouge">hello-word</code>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>mkdir hello-world</code></pre></figure>
+
+<p>Crie o arquilo <code class="highlighter-rouge">hw.js</code> dentro da pasta <code class="highlighter-rouge">hello-world</code>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd </span>hello-world
+<span class="gp">$ </span>touch hw.js</code></pre></figure>
+
+<p>Abra o arquivo <code class="highlighter-rouge">hw.js</code> com seu editor de código preferido e digite o seguitne comando:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">)</span></code></pre></figure>
+
+<blockquote>
+  <p>Caso você não possua um editor de código, você pode baixar o VS Code <a href="https://code.visualstudio.com/">aqui</a>.</p>
+</blockquote>
+
+<p>Salve o arquivo e execute o commando:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>node hw.js
+Hello World!</code></pre></figure>
+
+<h3 id="criando-um-servidor-http">Criando um servidor HTTP</h3>
+
+<p>Crie a pasta <code class="highlighter-rouge">http-server</code>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>mkdir http-server</code></pre></figure>
+
+<p>Crie o arquilo <code class="highlighter-rouge">index.js</code> dentro da pasta <code class="highlighter-rouge">http-server</code>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span><span class="nb">cd </span>http-server
+<span class="gp">$ </span>touch index.js</code></pre></figure>
+
+<p>Abra o arquivo <code class="highlighter-rouge">index.js</code> e copie o seguinte código:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// importação do módulo http, que faz parte do núcleo do node</span>
+<span class="kr">const</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'http'</span><span class="p">)</span>  
+
+<span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span>
+
+<span class="c1">// função para tratar todas as requisições recebidas</span>
+<span class="kr">const</span> <span class="nx">requestHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span>
+  <span class="c1">// envia a resposta 200 OK, com a mensagem 'Hello Node.js Server!'</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hello Node.js Server!'</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">requestHandler</span><span class="p">)</span>
+
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="c1">// se ocorrer algum erro ao iniciar o servidor, este callback será chamado</span>
+  <span class="c1">// o erro mais comum que pode acontecer é a porta já estar em uso</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'something bad happened'</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">servidor</span> <span class="nx">escutando</span> <span class="nx">na</span> <span class="nx">porta</span> <span class="nx">$</span><span class="p">{</span><span class="nx">port</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+<p>Salve o arquivo e execute o commando:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>node index.js</code></pre></figure>
+
+          </div>
+
+          <div class="article-share">
+            
+            
+            <a href="https://twitter.com/home?status=Introdu%C3%A7%C3%A3o+ao+Node.js - /posts/introducao-nodejs" title="Share on Twitter" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6 -18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6 0.8 15 2.5 22.1 -80.5-4-151.9-42.6-199.6-101.3 -8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7C67 210.7 52 206.3 39 199c0 0.4 0 0.8 0 1.2 0 47 33.4 86.1 77.7 95 -8.1 2.2-16.7 3.4-25.5 3.4 -6.2 0-12.3-0.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3 -33.1 26-74.9 41.5-120.3 41.5 -7.8 0-15.5-0.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-0.1-8.4-0.3-12.5C462.6 146 479 129 492 109.5z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=/posts/introducao-nodejs" title="Share on Facebook" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64H288z"/></svg>
+            </a>
+            <a href="https://plus.google.com/share?url=/posts/introducao-nodejs" title="Share on Google+" rel="noreferrer noopener" target="_blank">
+              <svg viewBox="0 0 128 128"><path d="M40.7 55.9v16.1c0 0 15.6 0 22 0C59.2 82.5 53.8 88.2 40.7 88.2c-13.3 0-23.7-10.8-23.7-24.2s10.4-24.2 23.7-24.2c7.1 0 11.6 2.5 15.8 5.9 3.3-3.3 3.1-3.8 11.6-11.9 -7.2-6.6-16.8-10.6-27.4-10.6C18.2 23.3 0 41.5 0 64c0 22.5 18.2 40.7 40.7 40.7 33.6 0 41.8-29.3 39-48.8H40.7zM113.9 56.7V42.6h-10.1v14.1H89.4v10.1h14.5v14.5h10.1V66.8H128V56.7H113.9z"/></svg>
+            </a>
+          </div>
+
+          
+        </article>
+        <footer class="footer appear">
+  <p>
+    Grupo de estudos Keyworks &copy; 2017
+  </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+
+<script src="/assets/vendor.js"></script>
+
+
+
+  <script src="/assets/webfonts.js"></script>
+
+
+
+
+  <script src="/assets/scrollappear.js"></script>
+
+
+
+<script src="/assets/application.js"></script>
+
+
+</body>
+</html>
