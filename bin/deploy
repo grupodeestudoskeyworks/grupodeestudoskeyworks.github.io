@@ -15,9 +15,10 @@ if [ ! -d ../deploy/ ]; then
     mkdir ../deploy/
 fi
 
-mv --backup=numbered _site/* ../deploy/
+rm ../deploy/* -dr
+
+mv _site/* ../deploy/
 rm -dr _site/
-rm ../deploy/*.~1~ -dr
 
 echo "Deployed Successfully!"
 
