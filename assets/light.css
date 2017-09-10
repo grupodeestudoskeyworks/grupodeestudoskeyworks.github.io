@@ -889,6 +889,10 @@ img {
     color: #615b5b; }
   .article-header a {
     text-decoration: none; }
+  .article-header .article-author-links {
+    margin: 0; }
+    .article-header .article-author-links li a {
+      font-size: 16px; }
 
 .article-content {
   display: block; }
