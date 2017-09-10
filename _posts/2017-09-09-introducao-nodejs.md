@@ -2,6 +2,7 @@
 layout: post
 title: "Introdução ao Node.js"
 description: "Criação de um servidor REST básico utilizando Node.js."
+author: augusto_rodrigues
 tags: [nodejs]
 ---
 

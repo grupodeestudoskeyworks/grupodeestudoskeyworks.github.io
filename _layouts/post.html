@@ -10,6 +10,12 @@
           <header class="article-header">
             <h1>{{ page.title }}</h1>
             <p>{{ page.description }}</p>
+              {% assign author = site.data.authors[page.author] %}
+              {% if author %}
+                <div class="article-author">
+                  <span>Escrito por {{ author.name }}</span>
+                </div>
+              {% endif %}
             <div class="article-list-footer">
               <span class="article-list-date">
                   {% assign A = page.date | date: "%-A" %}
@@ -63,6 +69,38 @@
                 {% endfor %}
               </div>
             </div>
+            {% if author %}
+              <ul class="header-links article-author-links">
+                  {% if author.facebook %}
+                    <li>
+                      <a href="https://www.facebook.com/{{ author.facebook }}" rel="noreferrer noopener" target="_blank" title="Facebook">
+                        <span class="icon icon-facebook"></span>
+                      </a>
+                    </li>
+                  {% endif %}
+                  {% if author.github %}
+                  <li>
+                    <a href="https://github.com/{{ author.github }}" rel="noreferrer noopener" target="_blank" title="GitHub">
+                      <span class="icon icon-github"></span>
+                    </a>
+                  </li>
+                {% endif %}
+                {% if author.linkedin %}
+                  <li>
+                    <a href="https://www.linkedin.com/in/{{ author.linkedin }}" rel="noreferrer noopener" target="_blank" title="LinkedIn">
+                      <span class="icon icon-linkedin"></span>
+                    </a>
+                  </li>
+                {% endif %}
+                {% if author.email %}
+                  <li>
+                    <a href="mailto:{{ author.email }}" title="Email">
+                      <span class="icon icon-email"></span>
+                    </a>
+                  </li>
+                {% endif %}
+                </ul>
+              {% endif %}
           </header>
 
           <div class="article-content">

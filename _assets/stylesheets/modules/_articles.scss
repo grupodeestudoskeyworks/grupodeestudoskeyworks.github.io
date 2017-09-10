@@ -139,6 +139,14 @@
   a {
     text-decoration: none;
   }
+
+  .article-author-links {
+    margin: 0;
+
+    li a {
+      font-size: 16px;
+    }
+  }
 }
 
 .article-content {
