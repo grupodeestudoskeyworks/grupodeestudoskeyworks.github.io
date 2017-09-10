@@ -1,0 +1,1 @@
+!function(n,t){var i=[],c=function(){n.each(i,function(){n(this)[0].getBoundingClientRect().top<n(t).height()&&n(this).addClass("appeared")})};n.fn.scrollAppear=function(){return this.each(function(){i.push(n(this))}),c(),n(t).scroll(function(){c()}),this}}(jQuery,window,document);

@@ -1,0 +1,1 @@
+$(function(){"function"==typeof $.fn.scrollAppear&&$(".appear").scrollAppear(),$(".fluidbox-trigger").fluidbox(),$(".article-share a").on("click",function(){return window.open($(this).attr("href"),"Share","width=200,height=200,noopener"),!1})});
