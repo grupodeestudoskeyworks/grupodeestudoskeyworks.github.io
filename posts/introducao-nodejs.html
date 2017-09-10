@@ -92,7 +92,7 @@
                 
                   
                   
-                    3 minutos de leitura
+                    8 minutos de leitura
                   
                 
               </span>
@@ -100,6 +100,10 @@
               <div class="article-list-tags">
                 
                   <a href="/tag/nodejs">nodejs</a>
+                
+                  <a href="/tag/npm">npm</a>
+                
+                  <a href="/tag/express">express</a>
                 
               </div>
             </div>
@@ -199,12 +203,12 @@ Hello World!</code></pre></figure>
 <p>Abra o arquivo <code class="highlighter-rouge">index.js</code> e copie o seguinte código:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// importação do módulo http, que faz parte do núcleo do node</span>
-<span class="kr">const</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'http'</span><span class="p">)</span>  
+<span class="kr">const</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'http'</span><span class="p">)</span>
 
 <span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span>
 
 <span class="c1">// função para tratar todas as requisições recebidas</span>
-<span class="kr">const</span> <span class="nx">requestHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+<span class="kr">const</span> <span class="nx">requestHandler</span> <span class="o">=</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">url</span><span class="p">)</span>
   <span class="c1">// envia a resposta 200 OK, com a mensagem 'Hello Node.js Server!'</span>
   <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hello Node.js Server!'</span><span class="p">)</span>
@@ -212,19 +216,179 @@ Hello World!</code></pre></figure>
 
 <span class="kr">const</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">requestHandler</span><span class="p">)</span>
 
-<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
-  <span class="c1">// se ocorrer algum erro ao iniciar o servidor, este callback será chamado</span>
-  <span class="c1">// o erro mais comum que pode acontecer é a porta já estar em uso</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'something bad happened'</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+<span class="c1">// se ocorrer algum erro ao iniciar o servidor este evento será invocado</span>
+<span class="nx">server</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">code</span> <span class="o">===</span> <span class="s1">'EADDRINUSE'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">A</span> <span class="nx">porta</span> <span class="nx">$</span><span class="p">{</span><span class="nx">port</span><span class="p">}</span> <span class="nx">j</span><span class="err">á</span> <span class="nx">est</span><span class="err">á</span> <span class="nx">em</span> <span class="nx">uso</span><span class="err">`</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Ocorreu um erro ao tentar iniciar o servidor'</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span>
   <span class="p">}</span>
+<span class="p">});</span>
 
+<span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">servidor</span> <span class="nx">escutando</span> <span class="nx">na</span> <span class="nx">porta</span> <span class="nx">$</span><span class="p">{</span><span class="nx">port</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
 <span class="p">})</span></code></pre></figure>
 
 <p>Salve o arquivo e execute o commando:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>node index.js</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>node index.js
+servidor escutando na porta 3000</code></pre></figure>
+
+<p>Abra o browser e acesse o endereço <code class="highlighter-rouge">http://localhost:3000/</code>, a mensagem “<code class="highlighter-rouge">Hello Node.js Server!</code>” deverá aparecer na tela.</p>
+
+<p>O módulo <strong>http</strong> é bem baixo nível. Construir uma aplicação web complexa utilizando o código acima iria consumir muito tempo. Este é o motivo pelo qual normalmente escolhemos um framework para abstrair tais comportamentos. Existem vários cujo você pode escolher, aqui estão os mais usados:</p>
+
+<ul>
+  <li><a href="http://expressjs.com/">express</a></li>
+  <li><a href="https://hapijs.com/">hapi</a></li>
+  <li><a href="http://koajs.com/">koa</a></li>
+  <li><a href="http://restify.com/">restify</a></li>
+</ul>
+
+<p>Para o nosso servidor utilizaremos o express, por ser o mais comum.</p>
+
+<h3 id="inicializano-o-projeto">Inicializano o projeto</h3>
+
+<p>Dentro da pasta <code class="highlighter-rouge">http-server</code> execute o comando:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>npm init -y</code></pre></figure>
+
+<p>Isso irá adicionar o <strong>arquivo de configuração</strong> básico do npm, o <code class="highlighter-rouge">package.json</code>.
+Ele possui a seguinte estrutura:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http-server"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li><strong>name</strong>: Nome do projeto, segue o padrão camel-dashed-case.</li>
+  <li><strong>version</strong>: Versão do pacote (este projeto é considerado um pacote do npm ainda não publicado).</li>
+  <li><strong>description</strong>: Breve descrição sobre o que se trata o projeto.</li>
+  <li><strong>main</strong>: Ponto de partida de sua aplicação (somente um referencial, não é utilizado pelo node).</li>
+  <li><strong>scripts</strong>: Aqui você pode informar qualquer script que desejar e executá-lo pelo comando <code class="highlighter-rouge">npm run &lt;nome-do-script&gt;</code>, ele irá rodar como bash a partir do mesmo diretório que o arquivo <code class="highlighter-rouge">package.json</code>.</li>
+</ul>
+
+<blockquote>
+  <p>O script <code class="highlighter-rouge">start</code> é uma exeção, ele pode ser executado simplesmente como <code class="highlighter-rouge">npm start</code>.</p>
+</blockquote>
+
+<h3 id="instalando-o-express">Instalando o Express</h3>
+
+<p>Dentro da pasta <code class="highlighter-rouge">http-server</code> execute:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>npm install express --save</code></pre></figure>
+
+<p>O comando <code class="highlighter-rouge">npm install</code> instala todos os módulos informados no diretório atual dentro da pasta node_modules. A flag <code class="highlighter-rouge">--save</code> diz para o npm adicionar a informação da dependência no <code class="highlighter-rouge">package.json</code>:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http-server"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+  </span><span class="nt">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"express"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.15.4"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>A pasta <code class="highlighter-rouge">node_modules</code> deve ser adicionada ao arquivo <code class="highlighter-rouge">.gitignore</code>. É uma má prática versioná-la assim como com qualquer gereciador de pacotes.</p>
+</blockquote>
+
+<p>Assim toda vez que você baixar o projeto, será necessário executar o commando <code class="highlighter-rouge">npm install</code>, ele irá restaurar todos os pacotes definidos em <code class="highlighter-rouge">package.json</code>.</p>
+
+<h4 id="aplicando-o-express">Aplicando o Express</h4>
+
+<p>Abra o arquivo <code class="highlighter-rouge">index.js</code> e substitua seu conteúdo pelo seguinte:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// importação do módulo recem instalado</span>
+<span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">)</span>  
+
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>  
+<span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span>
+
+<span class="c1">// callback para a rota http://localhost:3000/</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="nx">response</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'Hello from Express!'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">servidor</span> <span class="nx">escutando</span> <span class="nx">na</span> <span class="nx">porta</span> <span class="nx">$</span><span class="p">{</span><span class="nx">port</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+<p>A maior diferença que você deve notar é que o Express por padrão lhe retorna um roteador. Você não precisa fazer uma verificação manual da rota e decidir o que fazer com ela, ao invés disso pode definí-las com <code class="highlighter-rouge">app.get</code>, <code class="highlighter-rouge">app.post</code>, <code class="highlighter-rouge">app.put</code>, etc. Eles são traduzidos para os verbos HTTP correspondentes.</p>
+
+<p>Um dos conceitos mais poderosos que o Express implementa é o <strong>padrão middleware</strong>.</p>
+
+<h3 id="middlewares">Middlewares</h3>
+
+<p>Você pode fazer uma analogia de middlewares para pipelines Unix, porém para requisições HTTP:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">1º middleware -&gt; 2º middleware -&gt; 3º middleware -&gt; Manipulador opcional da rota</code></pre></figure>
+
+<p>Acima você pode ver como uma requisição passa por uma aplicação Express. Ela atravessa três middlewares. Cada um pode modificá-la, então baseado na regra de negócio, o terceiro middleware pode mandar de volta uma resposta ou passá-la para um manipulador de rota.</p>
+
+<p>Na prática, você pode fazer assim:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">)</span>  
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">)</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="nx">request</span><span class="p">.</span><span class="nx">chance</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span>
+  <span class="nx">next</span><span class="p">()</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">({</span>
+    <span class="na">chance</span><span class="p">:</span> <span class="nx">request</span><span class="p">.</span><span class="nx">chance</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>  </code></pre></figure>
+
+<p>Coisas para serem notadas aqui:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">app.use</code>: é assim que você define middlewares - ela recebe uma função com três parametros, o primeiro sendo a requisição, o segundo sendo a resposta e o terceiro sendo o callback para o <strong>próximo</strong>(<code class="highlighter-rouge">next</code>). Chamando <code class="highlighter-rouge">next</code> o Express saberá que ele pode ir para o próximo middleware ou gerenciador de rota.</li>
+  <li>o primeiro middleware irá logar os cabeçalhos e imeditamente chamar o próximo.</li>
+  <li>o segundo adiciona uma propriedade a mais - <strong>isso é uma das melhores características do padrão middleware</strong>. Seus middlewares podem adicionar informações a mais ao objeto da requisição que os próximos middlewares poderão ler/alterar.</li>
+</ul>
+
+<h3 id="manipulação-de-erros">Manipulação de erros</h3>
+
+<p>Assim como em todos os frameworks, ter uma manipulação correta de erros é crucial. No Express você tem que criar uma função middleware especial para fazê-lo - um middleware com quatro paramêtros.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">)</span>  
+<span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'boom explodiu'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">err</span><span class="p">,</span> <span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>  
+  <span class="c1">// loga o erro, por enquanto somente console.log</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s1">'Deu ruim!'</span><span class="p">)</span>
+<span class="p">})</span></code></pre></figure>
+
+<p>Coisas para serem notadas aqui:</p>
+
+<ul>
+  <li>A função manipuladora de erro deve ser a última a ser adiocionada com <code class="highlighter-rouge">app.use</code>.</li>
+  <li>O manipulador de erro tem um callback <code class="highlighter-rouge">next</code> que pode ser usado para encadear vários manipuladores de erro.</li>
+</ul>
 
           </div>
 
