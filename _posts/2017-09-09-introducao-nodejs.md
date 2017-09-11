@@ -279,3 +279,5 @@ Coisas para serem notadas aqui:
 
   * A função manipuladora de erro deve ser a última a ser adiocionada com `app.use`.
   * O manipulador de erro tem um callback `next` que pode ser usado para encadear vários manipuladores de erro.
+
+#### [Lista de exercícios](https://github.com/grupodeestudoskeyworks/exercicios-introducao-nodejs)
